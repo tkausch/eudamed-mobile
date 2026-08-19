@@ -205,6 +205,7 @@ struct ScannerView: View {
                     Image("SampleLabel")
                         .resizable()
                         .scaledToFit()
+                        .frame(maxHeight: 180)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
@@ -420,6 +421,7 @@ struct ScannerView: View {
                     Image("SampleLabel")
                         .resizable()
                         .scaledToFit()
+                        .frame(maxHeight: 180)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
