@@ -215,6 +215,7 @@ struct ScannerView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
+                #if targetEnvironment(simulator)
                 Divider()
 
                 VStack(alignment: .leading, spacing: 12) {
@@ -242,6 +243,7 @@ struct ScannerView: View {
                     .padding(10)
                     .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
                 }
+                #endif
 
                 Button {
                     viewModel.startScanning()
