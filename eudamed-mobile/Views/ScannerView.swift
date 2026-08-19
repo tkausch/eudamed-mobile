@@ -219,7 +219,7 @@ struct ScannerView: View {
                         .textCase(.uppercase)
 
                     HStack {
-                        TextField("Primary DI (01)", text: $viewModel.manualInput)
+                        TextField("00889024505414", text: $viewModel.manualInput)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.characters)
                             .font(.system(.body, design: .monospaced))
@@ -435,7 +435,7 @@ struct ScannerView: View {
                         .textCase(.uppercase)
 
                     HStack {
-                        TextField("Primary DI (01)", text: $viewModel.manualInput)
+                        TextField("00889024505414", text: $viewModel.manualInput)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.characters)
                             .font(.system(.body, design: .monospaced))
