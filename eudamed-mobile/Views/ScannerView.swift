@@ -203,40 +203,6 @@ struct ScannerView: View {
                         .textCase(.uppercase)
 
                     UdiDeviceLabelView(device: .sampleForDemo)
-
-                    HStack(alignment: .top, spacing: 8) {
-                        Image(systemName: "barcode.viewfinder")
-                            .foregroundStyle(.tint)
-                        Text("Scan the barcode on the label — or enter the UDI manually (see below).")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Entering the UDI manually")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
-
-                    UdiDeviceLabelView(device: .sampleForDemo, highlightPrimaryDI: true)
-
-                    HStack(alignment: .top, spacing: 8) {
-                        Text("(01)")
-                            .font(.system(size: 11, design: .monospaced))
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 2)
-                            .background(.blue.opacity(0.15))
-                            .foregroundStyle(.blue)
-                            .clipShape(RoundedRectangle(cornerRadius: 3))
-                        Text("The first number on the label is the UDI-DI (Application Identifier 01). Type it into the manual entry field.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
                 }
 
                 Text("Supported formats: QR · Code 128 · EAN-13 · EAN-8 · Code 39 · PDF-417 · Aztec")
@@ -361,106 +327,57 @@ struct ScannerView: View {
     // MARK: Camera restricted
 
     private var cameraRestrictedView: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                Image(systemName: "camera.slash")
-                    .font(.system(size: 48))
+        VStack(spacing: 20) {
+            Image(systemName: "camera.slash")
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary)
+
+            VStack(spacing: 8) {
+                Text("Camera access required")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Allow camera access in Settings to scan device barcodes.")
+                    .font(.subheadline)
                     .foregroundStyle(.secondary)
-
-                VStack(spacing: 8) {
-                    Text("Camera access required")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-
-                    Text("Allow camera access in Settings to scan device codes, or enter the UDI manually below.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-
-                Button {
-                    if let url = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(url)
-                    }
-                } label: {
-                    Label("Open Settings", systemImage: "gear")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-
-                Divider()
-
-                manualEntryPanel
+                    .multilineTextAlignment(.center)
             }
-            .padding()
+
+            Button {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                Label("Open Settings", systemImage: "gear")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .padding(.horizontal)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
     }
 
     // MARK: Unsupported
 
     private var unsupportedView: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                Image(systemName: "exclamationmark.triangle")
-                    .font(.system(size: 48))
+        VStack(spacing: 20) {
+            Image(systemName: "exclamationmark.triangle")
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary)
+
+            VStack(spacing: 8) {
+                Text("Scanner not available")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+
+                Text("Live scanning requires a device with Neural Engine (iPhone XS or later).")
+                    .font(.subheadline)
                     .foregroundStyle(.secondary)
-
-                VStack(spacing: 8) {
-                    Text("Scanner not available")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-
-                    Text("Live scanning requires a device with Neural Engine (iPhone XS or later). Enter the UDI manually to look up a device.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-
-                manualEntryPanel
+                    .multilineTextAlignment(.center)
             }
-            .padding()
         }
-    }
-
-    // MARK: Shared manual entry
-
-    private var manualEntryPanel: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 8) {
-                UdiDeviceLabelView(device: .sampleForDemo, highlightPrimaryDI: true)
-
-                HStack(alignment: .top, spacing: 6) {
-                    Text("(01)")
-                        .font(.system(size: 10, design: .monospaced))
-                        .fontWeight(.bold)
-                        .padding(.horizontal, 5)
-                        .padding(.vertical, 2)
-                        .background(.blue.opacity(0.15))
-                        .foregroundStyle(.blue)
-                        .clipShape(RoundedRectangle(cornerRadius: 3))
-                    Text("Enter UDI manually — this is the first number (01) on the device label.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            HStack {
-                TextField("Primary DI", text: $viewModel.manualInput)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.characters)
-                    .font(.system(.body, design: .monospaced))
-                    .onSubmit { viewModel.submitManual() }
-
-                Button {
-                    viewModel.submitManual()
-                } label: {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .font(.title2)
-                }
-                .disabled(viewModel.manualInput.trimmingCharacters(in: .whitespaces).isEmpty)
-            }
-            .padding(10)
-            .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
     }
 }
