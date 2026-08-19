@@ -392,23 +392,61 @@ struct ScannerView: View {
     // MARK: Unsupported
 
     private var unsupportedView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 48))
-                .foregroundStyle(.secondary)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                VStack(spacing: 8) {
+                    Text("Scanner not available")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-            VStack(spacing: 8) {
-                Text("Scanner not available")
-                    .font(.title3)
-                    .fontWeight(.semibold)
+                    Text("Live scanning requires a device with Neural Engine (iPhone XS or later). Enter the UDI manually instead.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
 
-                Text("Live scanning requires a device with Neural Engine (iPhone XS or later).")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Example label")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.secondary)
+                        .textCase(.uppercase)
+
+                    Image("SampleLabel")
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+
+                Divider()
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Enter UDI manually")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.secondary)
+                        .textCase(.uppercase)
+
+                    HStack {
+                        TextField("Primary DI (01)", text: $viewModel.manualInput)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.characters)
+                            .font(.system(.body, design: .monospaced))
+                            .onSubmit { viewModel.submitManual() }
+
+                        Button {
+                            viewModel.submitManual()
+                        } label: {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .font(.title2)
+                        }
+                        .disabled(viewModel.manualInput.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                    .padding(10)
+                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
+                }
             }
+            .padding()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
     }
 }
