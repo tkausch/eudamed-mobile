@@ -394,15 +394,20 @@ struct ScannerView: View {
     private var unsupportedView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                VStack(spacing: 8) {
-                    Text("Scanner not available")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Text("Live scanning requires a device with Neural Engine (iPhone XS or later). Enter the UDI manually instead.")
-                        .font(.subheadline)
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .font(.system(size: 32))
                         .foregroundStyle(.secondary)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Scanner not available")
+                            .font(.title3)
+                            .fontWeight(.semibold)
+
+                        Text("Live scanning requires a device with Neural Engine (iPhone XS or later). Enter the UDI manually instead.")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 VStack(alignment: .leading, spacing: 12) {
