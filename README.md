@@ -1,5 +1,7 @@
 # EUDAMED Mobile
 
+![EUDAMED Mobile](Specification/EudamedMobile.png)
+
 An iOS app for looking up medical devices and economic operators in the [European Database on Medical Devices (EUDAMED)](https://ec.europa.eu/tools/eudamed).
 
 ## Overview
