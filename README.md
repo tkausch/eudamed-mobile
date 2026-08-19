@@ -75,4 +75,9 @@ Open `eudamed-mobile.xcodeproj` and run the `eudamed-mobile-iOS` scheme on any s
 
 ## License
 
-Copyright © 2026 Thomas Kausch. All rights reserved.
+EUDAMED Mobile is available for **noncommercial use** under the
+[PolyForm Noncommercial License 1.0.0](LICENSE). See [EULA.md](EULA.md)
+for the full End User License Agreement, including restrictions on
+commercial use.
+
+For commercial licensing, contact thomas@kausch.li.
