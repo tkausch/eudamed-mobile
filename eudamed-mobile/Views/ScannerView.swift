@@ -208,6 +208,34 @@ struct ScannerView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
+                Divider()
+
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Enter UDI manually")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.secondary)
+                        .textCase(.uppercase)
+
+                    HStack {
+                        TextField("Primary DI (01)", text: $viewModel.manualInput)
+                            .autocorrectionDisabled()
+                            .textInputAutocapitalization(.characters)
+                            .font(.system(.body, design: .monospaced))
+                            .onSubmit { viewModel.submitManual() }
+
+                        Button {
+                            viewModel.submitManual()
+                        } label: {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .font(.title2)
+                        }
+                        .disabled(viewModel.manualInput.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                    .padding(10)
+                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
+                }
+
                 Text("Supported formats: QR · Code 128 · EAN-13 · EAN-8 · Code 39 · PDF-417 · Aztec")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
