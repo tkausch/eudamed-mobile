@@ -347,24 +347,13 @@ struct ScannerView: View {
                     .background(.quaternary, in: RoundedRectangle(cornerRadius: 6))
             }
 
-            VStack(spacing: 8) {
-                Button {
-                    viewModel.rescan()
-                } label: {
-                    Label("Scan Again", systemImage: "barcode.viewfinder")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-
-                Button {
-                    viewModel.manualInput = identifier
-                    viewModel.rescan()
-                } label: {
-                    Label("Edit Identifier", systemImage: "pencil")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
+            Button {
+                viewModel.rescan()
+            } label: {
+                Label("Scan Again", systemImage: "barcode.viewfinder")
+                    .frame(maxWidth: .infinity)
             }
+            .buttonStyle(.borderedProminent)
             .padding(.horizontal)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
