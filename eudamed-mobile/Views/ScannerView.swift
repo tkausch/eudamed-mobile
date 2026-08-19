@@ -11,7 +11,6 @@ enum ScannerState {
     case lookingUp(String)
     case error(String, Error)
     case cameraRestricted
-    case unsupported
 }
 
 // MARK: - ViewModel
@@ -19,19 +18,23 @@ enum ScannerState {
 @MainActor
 @Observable
 final class ScannerViewModel {
-    var state: ScannerState
+    var state: ScannerState = .intro
     var manualInput: String = ""
     var navigateToDevice: UdiDevice? = nil
+    var showUnsupportedAlert = false
 
     private let repository: any UdiDevicesRepository
     private var lookupTask: Task<Void, Never>?
 
     init(repository: any UdiDevicesRepository) {
         self.repository = repository
-        self.state = DataScannerViewController.isSupported ? .intro : .unsupported
     }
 
     func startScanning() {
+        guard DataScannerViewController.isSupported else {
+            showUnsupportedAlert = true
+            return
+        }
         state = .scanning
     }
 
@@ -171,8 +174,6 @@ struct ScannerView: View {
                 errorView(id, error)
             case .cameraRestricted:
                 cameraRestrictedView
-            case .unsupported:
-                unsupportedView
             }
         }
         .navigationTitle("Scan")
@@ -184,6 +185,11 @@ struct ScannerView: View {
             if old != nil && new == nil {
                 viewModel.resetAfterNavigation()
             }
+        }
+        .alert("Scanner Not Available", isPresented: $vm.showUnsupportedAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Live scanning requires a device with Neural Engine (iPhone XS or later).")
         }
     }
 
@@ -236,10 +242,6 @@ struct ScannerView: View {
                     .padding(10)
                     .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
                 }
-
-                Text("Supported formats: QR · Code 128 · EAN-13 · EAN-8 · Code 39 · PDF-417 · Aztec")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
 
                 Button {
                     viewModel.startScanning()
@@ -388,72 +390,5 @@ struct ScannerView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-    }
-
-    // MARK: Unsupported
-
-    private var unsupportedView: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                HStack(alignment: .top, spacing: 12) {
-                    Image(systemName: "exclamationmark.triangle")
-                        .font(.system(size: 32))
-                        .foregroundStyle(.secondary)
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Scanner not available")
-                            .font(.title3)
-                            .fontWeight(.semibold)
-
-                        Text("Live scanning requires a device with Neural Engine (iPhone XS or later). Enter the UDI manually instead.")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Example label")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
-
-                    Image("SampleLabel")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: 270)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                }
-
-                Divider()
-
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Enter UDI manually")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                        .textCase(.uppercase)
-
-                    HStack {
-                        TextField("00889024505414", text: $viewModel.manualInput)
-                            .autocorrectionDisabled()
-                            .textInputAutocapitalization(.characters)
-                            .font(.system(.body, design: .monospaced))
-                            .onSubmit { viewModel.submitManual() }
-
-                        Button {
-                            viewModel.submitManual()
-                        } label: {
-                            Image(systemName: "arrow.right.circle.fill")
-                                .font(.title2)
-                        }
-                        .disabled(viewModel.manualInput.trimmingCharacters(in: .whitespaces).isEmpty)
-                    }
-                    .padding(10)
-                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
-                }
-            }
-            .padding()
-        }
     }
 }
