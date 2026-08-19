@@ -1,0 +1,423 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		139C4E857456FB00821F1700 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3499190A9A9362DEA4C0B /* ContentView.swift */; };
+		7E0D05FF670680D19F14AB81 /* EudamedClient in Frameworks */ = {isa = PBXBuildFile; productRef = C9EDB6E6A23219C63BC72C06 /* EudamedClient */; };
+		854D7F84241E7C77CE4085F9 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8A0C062DE2E1D9A6D15D1 /* App.swift */; };
+		8FBD67A58518041E4F9F1A00 /* EudamedCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4E5B81739B1C721CE459CDE2 /* EudamedCore */; };
+		A15326A6823DFCD4C05664C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CB0C1C3E2DCB863A34E21BD /* Assets.xcassets */; };
+		B61547343035D44900B82250 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547333035D44900B82250 /* AppState.swift */; };
+		B61547383035D46700B82250 /* ActorSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547373035D46700B82250 /* ActorSearchView.swift */; };
+		B615473A3035D46800B82250 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547393035D46800B82250 /* ScannerView.swift */; };
+		B615473C3035D46E00B82250 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615473B3035D46E00B82250 /* SettingsView.swift */; };
+		B615473F3036046800B82250 /* ActorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615473E3036046800B82250 /* ActorDetailView.swift */; };
+		B61547413036046C00B82250 /* DeviceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547403036046C00B82250 /* DeviceSearchView.swift */; };
+		B615474330360BFD00B82250 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615474230360BFD00B82250 /* DeviceDetailView.swift */; };
+		B61547453036126A00B82250 /* UdiDeviceLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547443036126A00B82250 /* UdiDeviceLabelView.swift */; };
+		BEEE2432CFE116E10E7BAA33 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8991EB21DA1368CC2D073085 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		10A8A0C062DE2E1D9A6D15D1 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		16E3499190A9A9362DEA4C0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2CB0C1C3E2DCB863A34E21BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8991EB21DA1368CC2D073085 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B61547323035D0F300B82250 /* UseCaseCatalog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = UseCaseCatalog.md; sourceTree = "<group>"; };
+		B61547333035D44900B82250 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B61547373035D46700B82250 /* ActorSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorSearchView.swift; sourceTree = "<group>"; };
+		B61547393035D46800B82250 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		B615473B3035D46E00B82250 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B615473E3036046800B82250 /* ActorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailView.swift; sourceTree = "<group>"; };
+		B61547403036046C00B82250 /* DeviceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSearchView.swift; sourceTree = "<group>"; };
+		B615474230360BFD00B82250 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
+		B61547443036126A00B82250 /* UdiDeviceLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdiDeviceLabelView.swift; sourceTree = "<group>"; };
+		EC15DF15EE8CFF8F3CBE7770 /* eudamed-mobile-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eudamed-mobile-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F175BCA24CD3BFEE82EC987 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E0D05FF670680D19F14AB81 /* EudamedClient in Frameworks */,
+				8FBD67A58518041E4F9F1A00 /* EudamedCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18ACCC5647507C1963868C69 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8991EB21DA1368CC2D073085 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		65CBF0F5EC88CB85A65FD3D0 /* eudamed-mobile */ = {
+			isa = PBXGroup;
+			children = (
+				B615473D3035D60400B82250 /* Views */,
+				10A8A0C062DE2E1D9A6D15D1 /* App.swift */,
+				B61547333035D44900B82250 /* AppState.swift */,
+				2CB0C1C3E2DCB863A34E21BD /* Assets.xcassets */,
+				18ACCC5647507C1963868C69 /* Preview Content */,
+			);
+			path = "eudamed-mobile";
+			sourceTree = "<group>";
+		};
+		81F7E82E50C2AF59DF76DC93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC15DF15EE8CFF8F3CBE7770 /* eudamed-mobile-iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B61547313035CFE300B82250 /* Specification */ = {
+			isa = PBXGroup;
+			children = (
+				B61547323035D0F300B82250 /* UseCaseCatalog.md */,
+			);
+			path = Specification;
+			sourceTree = "<group>";
+		};
+		B615473D3035D60400B82250 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B61547373035D46700B82250 /* ActorSearchView.swift */,
+				B61547393035D46800B82250 /* ScannerView.swift */,
+				B615473B3035D46E00B82250 /* SettingsView.swift */,
+				16E3499190A9A9362DEA4C0B /* ContentView.swift */,
+				B615473E3036046800B82250 /* ActorDetailView.swift */,
+				B61547403036046C00B82250 /* DeviceSearchView.swift */,
+				B615474230360BFD00B82250 /* DeviceDetailView.swift */,
+				B61547443036126A00B82250 /* UdiDeviceLabelView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E9408450DCC44DD287EED829 = {
+			isa = PBXGroup;
+			children = (
+				B61547313035CFE300B82250 /* Specification */,
+				65CBF0F5EC88CB85A65FD3D0 /* eudamed-mobile */,
+				81F7E82E50C2AF59DF76DC93 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6327527BFAC6A08D303D21D0 /* eudamed-mobile-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F39E72A3440F2CDA96C8150 /* Build configuration list for PBXNativeTarget "eudamed-mobile-iOS" */;
+			buildPhases = (
+				C0EE3D3900D50019B482C0D2 /* Sources */,
+				9333528A1905A9B82B0629DB /* Resources */,
+				1F175BCA24CD3BFEE82EC987 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "eudamed-mobile-iOS";
+			packageProductDependencies = (
+				C9EDB6E6A23219C63BC72C06 /* EudamedClient */,
+				4E5B81739B1C721CE459CDE2 /* EudamedCore */,
+			);
+			productName = "eudamed-mobile-iOS";
+			productReference = EC15DF15EE8CFF8F3CBE7770 /* eudamed-mobile-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87D6C7C7CE10D1CE86199FE7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 96F753F9DE1A1EAF101E3CAB /* Build configuration list for PBXProject "eudamed-mobile" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E9408450DCC44DD287EED829;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				122C31AB303D18345B375ADE /* XCRemoteSwiftPackageReference "eudamed-public" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 81F7E82E50C2AF59DF76DC93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6327527BFAC6A08D303D21D0 /* eudamed-mobile-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9333528A1905A9B82B0629DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A15326A6823DFCD4C05664C9 /* Assets.xcassets in Resources */,
+				BEEE2432CFE116E10E7BAA33 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C0EE3D3900D50019B482C0D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B615474330360BFD00B82250 /* DeviceDetailView.swift in Sources */,
+				B615473F3036046800B82250 /* ActorDetailView.swift in Sources */,
+				B615473C3035D46E00B82250 /* SettingsView.swift in Sources */,
+				B61547413036046C00B82250 /* DeviceSearchView.swift in Sources */,
+				B61547453036126A00B82250 /* UdiDeviceLabelView.swift in Sources */,
+				B61547343035D44900B82250 /* AppState.swift in Sources */,
+				B61547383035D46700B82250 /* ActorSearchView.swift in Sources */,
+				139C4E857456FB00821F1700 /* ContentView.swift in Sources */,
+				B615473A3035D46800B82250 /* ScannerView.swift in Sources */,
+				854D7F84241E7C77CE4085F9 /* App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2D41385C4FAB37B2A750DBD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2FC86165780CB7C9B2CA8ED0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "li.kausch.eudamed-mobile";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E14E8FF6E8F73A3B5D0DFCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D52C107F7100DFB149F919ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "li.kausch.eudamed-mobile";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F39E72A3440F2CDA96C8150 /* Build configuration list for PBXNativeTarget "eudamed-mobile-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FC86165780CB7C9B2CA8ED0 /* Debug */,
+				D52C107F7100DFB149F919ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		96F753F9DE1A1EAF101E3CAB /* Build configuration list for PBXProject "eudamed-mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D41385C4FAB37B2A750DBD4 /* Debug */,
+				8E14E8FF6E8F73A3B5D0DFCC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		122C31AB303D18345B375ADE /* XCRemoteSwiftPackageReference "eudamed-public" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tkausch/eudamed-public";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E5B81739B1C721CE459CDE2 /* EudamedCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 122C31AB303D18345B375ADE /* XCRemoteSwiftPackageReference "eudamed-public" */;
+			productName = EudamedCore;
+		};
+		C9EDB6E6A23219C63BC72C06 /* EudamedClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 122C31AB303D18345B375ADE /* XCRemoteSwiftPackageReference "eudamed-public" */;
+			productName = EudamedClient;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 87D6C7C7CE10D1CE86199FE7 /* Project object */;
+}
