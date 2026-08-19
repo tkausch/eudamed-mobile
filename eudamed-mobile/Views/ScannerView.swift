@@ -202,7 +202,10 @@ struct ScannerView: View {
                         .foregroundStyle(.secondary)
                         .textCase(.uppercase)
 
-                    UdiDeviceLabelView(device: .sampleForDemo)
+                    Image("SampleLabel")
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
                 Text("Supported formats: QR · Code 128 · EAN-13 · EAN-8 · Code 39 · PDF-417 · Aztec")
