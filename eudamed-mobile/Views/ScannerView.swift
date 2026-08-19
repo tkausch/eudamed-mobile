@@ -9,7 +9,6 @@ enum ScannerState {
     case intro
     case scanning
     case lookingUp(String)
-    case noDevice(String)
     case error(String, Error)
     case cameraRestricted
     case unsupported
@@ -53,7 +52,7 @@ final class ScannerViewModel {
                 if let device {
                     navigateToDevice = device
                 } else {
-                    state = .noDevice(identifier)
+                    state = .intro
                 }
             } catch is CancellationError {
                 return
@@ -168,8 +167,6 @@ struct ScannerView: View {
                 scanningView
             case .lookingUp(let id):
                 lookingUpView(id)
-            case .noDevice(let id):
-                noDeviceView(id)
             case .error(let id, let error):
                 errorView(id, error)
             case .cameraRestricted:
@@ -198,7 +195,6 @@ struct ScannerView: View {
                 Text("Point the camera at a barcode printed on a medical device label. The app reads the UDI and looks up the device in EUDAMED.")
                     .foregroundStyle(.secondary)
 
-                // Visual label example
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Example label")
                         .font(.subheadline)
@@ -219,7 +215,6 @@ struct ScannerView: View {
 
                 Divider()
 
-                // Manual entry explanation with annotated label
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Entering the UDI manually")
                         .font(.subheadline)
@@ -270,7 +265,6 @@ struct ScannerView: View {
                 onCameraRestricted: { viewModel.cameraBecameRestricted() }
             )
 
-            // Manual entry panel
             VStack(spacing: 12) {
                 Text("Or enter an identifier manually")
                     .font(.caption)
@@ -320,44 +314,6 @@ struct ScannerView: View {
             .buttonStyle(.bordered)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    // MARK: No device
-
-    private func noDeviceView(_ identifier: String) -> some View {
-        VStack(spacing: 20) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 48))
-                .foregroundStyle(.secondary)
-
-            VStack(spacing: 8) {
-                Text("No device found")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-
-                Text("EUDAMED returned no record for this identifier.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-
-                Text(identifier)
-                    .font(.system(.body, design: .monospaced))
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(.quaternary, in: RoundedRectangle(cornerRadius: 6))
-            }
-
-            Button {
-                viewModel.rescan()
-            } label: {
-                Label("Scan Again", systemImage: "barcode.viewfinder")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.borderedProminent)
-            .padding(.horizontal)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding()
     }
 
     // MARK: Error
@@ -470,7 +426,6 @@ struct ScannerView: View {
 
     private var manualEntryPanel: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Annotated label showing which number to enter
             VStack(alignment: .leading, spacing: 8) {
                 UdiDeviceLabelView(device: .sampleForDemo, highlightPrimaryDI: true)
 
@@ -489,7 +444,6 @@ struct ScannerView: View {
                 }
             }
 
-            // Entry field
             HStack {
                 TextField("Primary DI", text: $viewModel.manualInput)
                     .autocorrectionDisabled()
