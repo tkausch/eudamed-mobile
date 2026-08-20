@@ -411,7 +411,7 @@
 			repositoryURL = "https://github.com/tkausch/eudamed-public";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

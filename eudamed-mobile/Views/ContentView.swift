@@ -9,7 +9,7 @@ struct ContentView: View {
                 DeviceSearchView(repository: appState.deviceRepository)
             }
             .tabItem {
-                Label("Devices", systemImage: "shippingbox")
+                Label("Devices", systemImage: "waveform.path.ecg")
             }
 
             NavigationStack {

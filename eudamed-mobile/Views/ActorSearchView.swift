@@ -74,7 +74,7 @@ final class ActorSearchViewModel {
             base = actors
         }
         let sorted = base.sorted {
-            ($0.name ?? $0.actorId).localizedCompare($1.name ?? $1.actorId) == .orderedAscending
+            ($0.name ?? $0.actorId).localizedCaseInsensitiveCompare($1.name ?? $1.actorId) == .orderedAscending
         }
         var result: [(letter: String, actors: [Actor])] = []
         for actor in sorted {
@@ -98,6 +98,10 @@ final class ActorSearchViewModel {
         actorType != nil ||
         statusFilter != nil ||
         [name, srn, countryCode].contains { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+    }
+
+    var displayedActorCount: Int {
+        groupedActors.reduce(0) { $0 + $1.actors.count }
     }
 
     var activeFilterCount: Int {
@@ -192,6 +196,10 @@ struct ActorSearchView: View {
                         Label(msg, systemImage: "exclamationmark.circle")
                             .foregroundStyle(.red)
                     }
+                }
+
+                if viewModel.hasSearched || viewModel.isLoading {
+                    resultCountSection
                 }
 
                 if viewModel.isLoading {
@@ -304,6 +312,30 @@ struct ActorSearchView: View {
             }
             .sheet(isPresented: $showingCountryPicker) {
                 CountryPickerView(selectedCode: $viewModel.countryCode)
+            }
+        }
+    }
+
+    // MARK: Result count
+
+    private var resultCountSection: some View {
+        let displayed = viewModel.displayedActorCount
+        let total = viewModel.actors.count
+        let text: String
+        if viewModel.isLoading {
+            text = "Searching…"
+        } else if viewModel.statusFilter != nil && displayed != total {
+            text = "\(displayed) of \(total) result\(total == 1 ? "" : "s")"
+        } else {
+            text = "\(displayed) result\(displayed == 1 ? "" : "s")"
+        }
+        return Section {
+            HStack {
+                Spacer()
+                Text(text)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                Spacer()
             }
         }
     }
