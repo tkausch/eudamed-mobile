@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Medical device cross</title>
+  <g fill="#FFFFFF">
+    <rect x="460.70" y="352.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="352.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="406.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="406.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="352.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="406.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="568.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="622.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="352.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="406.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="568.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="622.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="568.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="568.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="622.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="622.70" width="48.60" height="48.60" rx="8.64"/>
+  </g>
+</svg>

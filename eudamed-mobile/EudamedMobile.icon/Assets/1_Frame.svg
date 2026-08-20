@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>UDI matrix finder frame</title>
+  <g fill="#FFFFFF">
+    <rect x="190.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="298.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="406.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="622.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="730.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="190.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="244.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="298.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="298.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="352.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="406.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="406.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="460.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="514.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="568.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="622.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="622.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="676.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="730.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="730.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="190.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="244.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="298.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="352.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="406.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="460.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="514.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="568.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="622.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="676.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="730.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+    <rect x="784.70" y="784.70" width="48.60" height="48.60" rx="8.64"/>
+  </g>
+</svg>

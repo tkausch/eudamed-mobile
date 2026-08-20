@@ -3,6 +3,7 @@ import EudamedClient
 
 struct DeviceDetailView: View {
     let device: UdiDevice
+    var onScanAgain: (() -> Void)? = nil
 
     var body: some View {
         List {
@@ -16,6 +17,17 @@ struct DeviceDetailView: View {
         .listStyle(.insetGrouped)
         .navigationTitle(device.tradeName ?? device.deviceName ?? device.primaryDi)
         .navigationBarTitleDisplayMode(.large)
+        .navigationBarBackButtonHidden(onScanAgain != nil)
+        .toolbar {
+            if let onScanAgain {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: onScanAgain) {
+                        Label("Scan", systemImage: "barcode.viewfinder")
+                    }
+                    .tint(.blue)
+                }
+            }
+        }
     }
 
     // MARK: Version warning (shown when not on latest)
@@ -55,8 +67,21 @@ struct DeviceDetailView: View {
 
     private var identificationSection: some View {
         Section("Identification") {
-            LabeledContent("Primary DI", value: device.primaryDi)
-                .font(.system(.body, design: .monospaced))
+            LabeledContent("Primary DI") {
+                HStack(spacing: 8) {
+                    Text(device.primaryDi)
+                        .font(.system(.body, design: .monospaced))
+                        .textSelection(.enabled)
+                    Button {
+                        UIPasteboard.general.string = device.primaryDi
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                            .font(.caption)
+                            .foregroundStyle(.blue)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
 
             if let basicUdi = device.basicUdi {
                 LabeledContent("Basic UDI-DI", value: basicUdi)

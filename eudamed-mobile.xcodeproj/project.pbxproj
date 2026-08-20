@@ -20,6 +20,7 @@
 		B61547413036046C00B82250 /* DeviceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547403036046C00B82250 /* DeviceSearchView.swift */; };
 		B615474330360BFD00B82250 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615474230360BFD00B82250 /* DeviceDetailView.swift */; };
 		B61547453036126A00B82250 /* UdiDeviceLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547443036126A00B82250 /* UdiDeviceLabelView.swift */; };
+		B615474830362DB600B82250 /* EudamedMobile.icon in Resources */ = {isa = PBXBuildFile; fileRef = B615474730362DB600B82250 /* EudamedMobile.icon */; };
 		BEEE2432CFE116E10E7BAA33 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8991EB21DA1368CC2D073085 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,8 @@
 		B61547403036046C00B82250 /* DeviceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSearchView.swift; sourceTree = "<group>"; };
 		B615474230360BFD00B82250 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 		B61547443036126A00B82250 /* UdiDeviceLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdiDeviceLabelView.swift; sourceTree = "<group>"; };
+		B61547463036297B00B82250 /* EudamedMobile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EudamedMobile.png; sourceTree = "<group>"; };
+		B615474730362DB600B82250 /* EudamedMobile.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = EudamedMobile.icon; sourceTree = "<group>"; };
 		EC15DF15EE8CFF8F3CBE7770 /* eudamed-mobile-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eudamed-mobile-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,6 +70,7 @@
 				B615473D3035D60400B82250 /* Views */,
 				10A8A0C062DE2E1D9A6D15D1 /* App.swift */,
 				B61547333035D44900B82250 /* AppState.swift */,
+				B615474730362DB600B82250 /* EudamedMobile.icon */,
 				2CB0C1C3E2DCB863A34E21BD /* Assets.xcassets */,
 				18ACCC5647507C1963868C69 /* Preview Content */,
 			);
@@ -84,6 +88,7 @@
 		B61547313035CFE300B82250 /* Specification */ = {
 			isa = PBXGroup;
 			children = (
+				B61547463036297B00B82250 /* EudamedMobile.png */,
 				B61547323035D0F300B82250 /* UseCaseCatalog.md */,
 			);
 			path = Specification;
@@ -174,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A15326A6823DFCD4C05664C9 /* Assets.xcassets in Resources */,
+				B615474830362DB600B82250 /* EudamedMobile.icon in Resources */,
 				BEEE2432CFE116E10E7BAA33 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,10 +273,12 @@
 		2FC86165780CB7C9B2CA8ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = EudamedMobile;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";
@@ -349,10 +357,12 @@
 		D52C107F7100DFB149F919ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = EudamedMobile;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";

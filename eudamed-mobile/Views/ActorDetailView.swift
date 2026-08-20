@@ -15,7 +15,7 @@ struct ActorDetailView: View {
             if hasPrrc { prrcSection }
         }
         .listStyle(.insetGrouped)
-        .navigationTitle(actor.name ?? actor.actorId)
+        .navigationTitle("Actor Details")
         .navigationBarTitleDisplayMode(.large)
     }
 

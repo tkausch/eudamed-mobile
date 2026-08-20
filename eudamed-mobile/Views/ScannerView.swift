@@ -78,7 +78,7 @@ final class ScannerViewModel {
     }
 
     func resetAfterNavigation() {
-        state = .scanning
+        state = .intro
     }
 
     func cameraBecameRestricted() {
@@ -178,8 +178,20 @@ struct ScannerView: View {
         }
         .navigationTitle("Scan")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if case .intro = viewModel.state {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: viewModel.startScanning) {
+                        Label("Scan", systemImage: "barcode.viewfinder")
+                    }
+                    .tint(.blue)
+                }
+            }
+        }
         .navigationDestination(item: $vm.navigateToDevice) { device in
-            DeviceDetailView(device: device)
+            DeviceDetailView(device: device, onScanAgain: {
+                vm.navigateToDevice = nil
+            })
         }
         .onChange(of: vm.navigateToDevice) { old, new in
             if old != nil && new == nil {
@@ -244,15 +256,6 @@ struct ScannerView: View {
                     .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
                 }
                 #endif
-
-                Button {
-                    viewModel.startScanning()
-                } label: {
-                    Label("Start Scanning", systemImage: "barcode.viewfinder")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
             }
             .padding()
         }
@@ -261,38 +264,10 @@ struct ScannerView: View {
     // MARK: Scanning
 
     private var scanningView: some View {
-        ZStack(alignment: .bottom) {
-            DataScannerRepresentable(
-                onCodeScanned: { viewModel.codeScanned($0) },
-                onCameraRestricted: { viewModel.cameraBecameRestricted() }
-            )
-
-            VStack(spacing: 12) {
-                Text("Or enter an identifier manually")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                HStack {
-                    TextField("Primary DI", text: $viewModel.manualInput)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.characters)
-                        .font(.system(.body, design: .monospaced))
-                        .padding(10)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
-                        .onSubmit { viewModel.submitManual() }
-
-                    Button {
-                        viewModel.submitManual()
-                    } label: {
-                        Image(systemName: "arrow.right.circle.fill")
-                            .font(.title2)
-                    }
-                    .disabled(viewModel.manualInput.trimmingCharacters(in: .whitespaces).isEmpty)
-                }
-            }
-            .padding()
-            .background(.regularMaterial)
-        }
+        DataScannerRepresentable(
+            onCodeScanned: { viewModel.codeScanned($0) },
+            onCameraRestricted: { viewModel.cameraBecameRestricted() }
+        )
     }
 
     // MARK: Looking up
