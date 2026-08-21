@@ -90,6 +90,11 @@ final class ScannerViewModel {
         state = .scanning
     }
 
+    func cancelScanning() {
+        lookupTask?.cancel()
+        state = .intro
+    }
+
     func resetAfterNavigation() {
         state = .intro
     }
@@ -223,6 +228,15 @@ struct ScannerView: View {
         }
         .navigationTitle("Scan")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if case .scanning = viewModel.state {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: viewModel.cancelScanning) {
+                        Label("Close", systemImage: "xmark")
+                    }
+                }
+            }
+        }
         .navigationDestination(item: $vm.navigateToDevice) { device in
             DeviceDetailView(device: device, onScanAgain: {
                 vm.navigateToDevice = nil
@@ -258,17 +272,6 @@ struct ScannerView: View {
                 Text("Point the camera at a barcode printed on a medical device label. The app reads the UDI and looks up the device in EUDAMED.")
                     .foregroundStyle(.secondary)
 
-                Button(action: viewModel.startScanning) {
-                    Label("Scan", systemImage: "barcode.viewfinder")
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.blue)
-                .controlSize(.large)
-
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Example label")
                         .font(.subheadline)
@@ -282,6 +285,16 @@ struct ScannerView: View {
                         .frame(maxHeight: 270)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
+
+                Button(action: viewModel.startScanning) {
+                    Label("Scan", systemImage: "barcode.viewfinder")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 4)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+                .controlSize(.regular)
 
                 #if targetEnvironment(simulator)
                 Divider()
