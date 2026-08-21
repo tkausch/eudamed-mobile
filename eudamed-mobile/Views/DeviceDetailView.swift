@@ -50,23 +50,25 @@ struct DeviceDetailView: View {
     // MARK: Status (first full section — visible without scrolling)
 
     private var statusSection: some View {
-        Section("Status") {
-            if let statusId = device.statusId {
-                LabeledContent("Record status", value: "\(statusId)")
+        Section {
+            if let status = device.status ?? device.statusId.map({ "ID \($0)" }) {
+                LabeledContent("Record status", value: status)
             }
-            if let deviceStatusTypeId = device.deviceStatusTypeId {
-                LabeledContent("Device status type", value: "\(deviceStatusTypeId)")
+            if let deviceStatusType = device.deviceStatusType ?? device.deviceStatusTypeId.map({ "ID \($0)" }) {
+                LabeledContent("Device status", value: deviceStatusType)
             }
-            if let marketId = device.placedOnTheMarketId {
-                LabeledContent("Placed on the market", value: "\(marketId)")
+            if let market = device.placedOnTheMarket ?? device.placedOnTheMarketId.map({ "ID \($0)" }) {
+                LabeledContent("Placed on the market", value: market)
             }
+        } header: {
+            Text("Status")
         }
     }
 
     // MARK: Identification
 
     private var identificationSection: some View {
-        Section("Identification") {
+        Section {
             LabeledContent("Primary DI") {
                 HStack(spacing: 8) {
                     Text(device.primaryDi)
@@ -103,18 +105,20 @@ struct DeviceDetailView: View {
                 LabeledContent("Direct marketing DI", value: ddi)
                     .font(.system(.body, design: .monospaced))
             }
+        } header: {
+            Text("Identification")
         }
     }
 
     // MARK: Classification
 
     private var classificationSection: some View {
-        Section("Classification") {
-            if let riskClassId = device.riskClassId {
-                LabeledContent("Risk class", value: "ID \(riskClassId)")
+        Section {
+            if let riskClass = device.riskClass ?? device.riskClassId.map({ "ID \($0)" }) {
+                LabeledContent("Risk class", value: riskClass)
             }
-            if let legId = device.applicableLegislationId {
-                LabeledContent("Applicable legislation", value: "ID \(legId)")
+            if let legislation = device.applicableLegislation ?? device.applicableLegislationId.map({ "ID \($0)" }) {
+                LabeledContent("Applicable legislation", value: legislation)
             }
             if let code = device.nomenclatureCode {
                 LabeledContent("Nomenclature code", value: code)
@@ -122,6 +126,8 @@ struct DeviceDetailView: View {
             if let criterion = device.deviceCriterion {
                 LabeledContent("Device criterion", value: criterion)
             }
+        } header: {
+            Text("Classification")
         }
     }
 
@@ -137,7 +143,7 @@ struct DeviceDetailView: View {
     }
 
     private var characteristicsSection: some View {
-        Section("Characteristics") {
+        Section {
             characteristicRow("Implantable", value: device.implantable)
             characteristicRow("Sterile", value: device.sterile)
             characteristicRow("Requires sterilization", value: device.sterilization)
@@ -153,6 +159,8 @@ struct DeviceDetailView: View {
             characteristicRow("Endocrine disruptor", value: device.endocrineDisruptor)
             characteristicRow("Latex", value: device.latex)
             characteristicRow("Companion diagnostics", value: device.companionDiagnostics)
+        } header: {
+            Text("Characteristics")
         }
     }
 
@@ -166,7 +174,7 @@ struct DeviceDetailView: View {
     // MARK: Manufacturer
 
     private var manufacturerSection: some View {
-        Section("Manufacturer") {
+        Section {
             if let name = device.mfName {
                 LabeledContent("Name", value: name)
             }
@@ -180,6 +188,8 @@ struct DeviceDetailView: View {
             if let abbr = device.actorAbbreviatedNames {
                 LabeledContent("Abbreviated names", value: abbr)
             }
+        } header: {
+            Text("Manufacturer")
         }
     }
 }

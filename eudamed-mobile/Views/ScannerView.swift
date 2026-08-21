@@ -9,8 +9,21 @@ enum ScannerState {
     case intro
     case scanning
     case lookingUp(String)
+    case notFound(String)
     case error(String, Error)
     case cameraRestricted
+
+    var showsCamera: Bool {
+        switch self {
+        case .scanning, .lookingUp, .notFound: return true
+        default: return false
+        }
+    }
+
+    var cameraIsActive: Bool {
+        if case .scanning = self { return true }
+        return false
+    }
 }
 
 // MARK: - ViewModel
@@ -55,7 +68,7 @@ final class ScannerViewModel {
                 if let device {
                     navigateToDevice = device
                 } else {
-                    state = .intro
+                    state = .notFound(identifier)
                 }
             } catch is CancellationError {
                 return
@@ -89,6 +102,7 @@ final class ScannerViewModel {
 // MARK: - DataScannerRepresentable
 
 struct DataScannerRepresentable: UIViewControllerRepresentable {
+    var isActive: Bool
     var onCodeScanned: (String) -> Void
     var onCameraRestricted: () -> Void
 
@@ -99,7 +113,10 @@ struct DataScannerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> DataScannerViewController {
         let scanner = DataScannerViewController(
             recognizedDataTypes: [
-                .barcode(symbologies: [.qr, .code128, .ean13, .ean8, .code39, .pdf417, .aztec])
+                .barcode(symbologies: [
+                    .qr, .code128, .ean13, .ean8, .code39,
+                    .pdf417, .aztec, .dataMatrix
+                ])
             ],
             qualityLevel: .balanced,
             recognizesMultipleItems: false,
@@ -114,7 +131,8 @@ struct DataScannerRepresentable: UIViewControllerRepresentable {
     func updateUIViewController(_ scanner: DataScannerViewController, context: Context) {
         context.coordinator.onCodeScanned = onCodeScanned
         context.coordinator.onCameraRestricted = onCameraRestricted
-        if !scanner.isScanning {
+        if isActive && !scanner.isScanning {
+            context.coordinator.resetScanned()
             try? scanner.startScanning()
         }
     }
@@ -129,6 +147,8 @@ struct DataScannerRepresentable: UIViewControllerRepresentable {
             self.onCodeScanned = onCodeScanned
             self.onCameraRestricted = onCameraRestricted
         }
+
+        func resetScanned() { scanned = false }
 
         func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
             guard !scanned else { return }
@@ -162,14 +182,39 @@ struct ScannerView: View {
     var body: some View {
         @Bindable var vm = viewModel
 
-        Group {
+        ZStack {
+            // Camera view is stable across .scanning and .lookingUp to avoid
+            // recreating the DataScannerViewController on state transitions.
+            if viewModel.state.showsCamera {
+                DataScannerRepresentable(
+                    isActive: viewModel.state.cameraIsActive,
+                    onCodeScanned: { viewModel.codeScanned($0) },
+                    onCameraRestricted: { viewModel.cameraBecameRestricted() }
+                )
+            }
+
             switch viewModel.state {
             case .intro:
                 introView
             case .scanning:
-                scanningView
+                EmptyView()
             case .lookingUp(let id):
-                lookingUpView(id)
+                VStack(spacing: 12) {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                    Text("Searching EUDAMED…")
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                    Text(id)
+                        .font(.system(.caption, design: .monospaced))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+                .padding(24)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+            case .notFound:
+                EmptyView()
             case .error(let id, let error):
                 errorView(id, error)
             case .cameraRestricted:
@@ -178,16 +223,6 @@ struct ScannerView: View {
         }
         .navigationTitle("Scan")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            if case .intro = viewModel.state {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: viewModel.startScanning) {
-                        Label("Scan", systemImage: "barcode.viewfinder")
-                    }
-                    .tint(.blue)
-                }
-            }
-        }
         .navigationDestination(item: $vm.navigateToDevice) { device in
             DeviceDetailView(device: device, onScanAgain: {
                 vm.navigateToDevice = nil
@@ -196,6 +231,16 @@ struct ScannerView: View {
         .onChange(of: vm.navigateToDevice) { old, new in
             if old != nil && new == nil {
                 viewModel.resetAfterNavigation()
+            }
+        }
+        .alert("Device Not Found", isPresented: Binding(
+            get: { if case .notFound = viewModel.state { return true }; return false },
+            set: { if !$0 { viewModel.rescan() } }
+        )) {
+            Button("Scan Again") { viewModel.rescan() }
+        } message: {
+            if case .notFound(let id) = viewModel.state {
+                Text("EUDAMED has no entry for \"\(id)\".")
             }
         }
         .alert("Scanner Not Available", isPresented: $vm.showUnsupportedAlert) {
@@ -212,6 +257,17 @@ struct ScannerView: View {
             VStack(alignment: .leading, spacing: 24) {
                 Text("Point the camera at a barcode printed on a medical device label. The app reads the UDI and looks up the device in EUDAMED.")
                     .foregroundStyle(.secondary)
+
+                Button(action: viewModel.startScanning) {
+                    Label("Scan", systemImage: "barcode.viewfinder")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+                .controlSize(.large)
 
                 VStack(alignment: .leading, spacing: 12) {
                     Text("Example label")
@@ -259,38 +315,6 @@ struct ScannerView: View {
             }
             .padding()
         }
-    }
-
-    // MARK: Scanning
-
-    private var scanningView: some View {
-        DataScannerRepresentable(
-            onCodeScanned: { viewModel.codeScanned($0) },
-            onCameraRestricted: { viewModel.cameraBecameRestricted() }
-        )
-    }
-
-    // MARK: Looking up
-
-    private func lookingUpView(_ identifier: String) -> some View {
-        VStack(spacing: 20) {
-            ProgressView()
-                .scaleEffect(1.5)
-
-            VStack(spacing: 4) {
-                Text("Looking up in EUDAMED…")
-                    .font(.headline)
-                Text(identifier)
-                    .font(.system(.subheadline, design: .monospaced))
-                    .foregroundStyle(.secondary)
-            }
-
-            Button("Cancel") {
-                viewModel.rescan()
-            }
-            .buttonStyle(.bordered)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: Error

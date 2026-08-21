@@ -29,6 +29,10 @@ final class DeviceSearchViewModel {
         [tradeName, mfSrn, primaryDi, basicUdi].contains { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
     }
 
+    var isSrnValid: Bool { SRNValidator.isValid(mfSrn) }
+    var isPrimaryDiValid: Bool { DeviceIdentifierValidator.isValid(primaryDi) }
+    var isBasicUdiValid: Bool { DeviceIdentifierValidator.isValid(basicUdi) }
+
     var activeFilterCount: Int {
         [tradeName, mfSrn, primaryDi, basicUdi].filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }.count
     }
@@ -36,6 +40,18 @@ final class DeviceSearchViewModel {
     func search() {
         guard canSearch else {
             validationMessage = "Enter at least one search criterion."
+            return
+        }
+        guard isSrnValid else {
+            validationMessage = "Invalid SRN - has wrong format"
+            return
+        }
+        guard isPrimaryDiValid else {
+            validationMessage = "Invalid Primary DIFor the "
+            return
+        }
+        guard isBasicUdiValid else {
+            validationMessage = "Invalid Basic UDI-DI"
             return
         }
         validationMessage = nil
@@ -180,13 +196,6 @@ struct DeviceSearchView: View {
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.characters)
                 .font(.system(.body, design: .monospaced))
-
-            Button {
-                viewModel.search()
-            } label: {
-                Label("Search", systemImage: "magnifyingglass")
-            }
-            .disabled(!viewModel.canSearch || viewModel.isLoading)
         }
     }
 
@@ -263,19 +272,31 @@ struct DeviceSearchView: View {
 
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
+        ToolbarItemGroup(placement: .primaryAction) {
             if viewModel.isLoading {
                 Button {
                     viewModel.cancel()
                 } label: {
-                    Label("Cancel search", systemImage: "xmark.circle.fill")
+                    Label("Cancel", systemImage: "xmark.circle.fill")
                 }
-            } else if viewModel.hasSearched || viewModel.activeFilterCount > 0 {
+                .tint(.blue)
+            } else {
+                if viewModel.hasSearched || viewModel.activeFilterCount > 0 {
+                    Button {
+                        viewModel.clear()
+                    } label: {
+                        Label("Reset", systemImage: "arrow.clockwise")
+                    }
+                    .tint(.blue)
+                }
+
                 Button {
-                    viewModel.clear()
+                    viewModel.search()
                 } label: {
-                    Label("Clear", systemImage: "arrow.clockwise")
+                    Label("Search", systemImage: "magnifyingglass")
                 }
+                .disabled(!viewModel.canSearch)
+                .tint(.blue)
             }
         }
     }
@@ -287,31 +308,46 @@ struct DeviceRowView: View {
     let device: UdiDevice
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(device.tradeName ?? device.deviceName ?? device.primaryDi)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(device.deviceName ?? device.tradeName ?? device.primaryDi)
                 .font(.body)
                 .fontWeight(.medium)
 
-            if let mfName = device.mfName {
-                Text(mfName)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            Text(device.primaryDi)
+            Text("UDI: \(device.primaryDi)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fontDesign(.monospaced)
+
+            metaLine
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(rowAccessibilityLabel)
     }
 
+    @ViewBuilder
+    private var metaLine: some View {
+        let parts = [device.deviceStatusType, device.placedOnTheMarket]
+            .compactMap { $0 }
+        if !parts.isEmpty {
+            HStack(spacing: 4) {
+                if let statusType = device.deviceStatusType {
+                    Circle()
+                        .fill(statusType.localizedCaseInsensitiveContains("no longer") ? Color.red : Color.green)
+                        .frame(width: 7, height: 7)
+                }
+                Text(parts.joined(separator: " · "))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
     private var rowAccessibilityLabel: String {
-        var parts: [String] = [device.tradeName ?? device.deviceName ?? device.primaryDi]
-        if let mf = device.mfName { parts.append(mf) }
+        var parts: [String] = [device.deviceName ?? device.tradeName ?? device.primaryDi]
         parts.append("Primary DI \(device.primaryDi)")
+        if let statusType = device.deviceStatusType { parts.append(statusType) }
+        if let market = device.placedOnTheMarket { parts.append(market) }
         return parts.joined(separator: ", ")
     }
 }

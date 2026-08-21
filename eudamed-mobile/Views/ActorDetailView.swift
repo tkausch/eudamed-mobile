@@ -22,7 +22,7 @@ struct ActorDetailView: View {
     // MARK: Registration (shown first — status visible in first screenful)
 
     private var registrationSection: some View {
-        Section("Registration") {
+        Section {
             if let status = actor.status {
                 LabeledContent("Status") {
                     if isActiveStatus(status) {
@@ -63,13 +63,15 @@ struct ActorDetailView: View {
             if let version = actor.version {
                 LabeledContent("Version", value: "\(version)")
             }
+        } header: {
+            Text("Registration")
         }
     }
 
     // MARK: Identity
 
     private var identitySection: some View {
-        Section("Identity") {
+        Section {
             if let name = actor.name {
                 LabeledContent("Legal name", value: name)
             }
@@ -91,6 +93,8 @@ struct ActorDetailView: View {
             if let vat = actor.europeanVatNumber {
                 LabeledContent("EU VAT number", value: vat)
             }
+        } header: {
+            Text("Identity")
         }
     }
 
@@ -101,7 +105,7 @@ struct ActorDetailView: View {
     }
 
     private var contactSection: some View {
-        Section("Contact") {
+        Section {
             if let email = actor.email {
                 LabeledContent("Email", value: email)
             }
@@ -111,6 +115,8 @@ struct ActorDetailView: View {
             if let web = actor.website {
                 LabeledContent("Website", value: web)
             }
+        } header: {
+            Text("Contact")
         }
     }
 
@@ -122,7 +128,7 @@ struct ActorDetailView: View {
     }
 
     private var addressSection: some View {
-        Section("Address") {
+        Section {
             if let building = actor.addressBuildingNumber, let street = actor.addressStreetName {
                 LabeledContent("Street", value: "\(building) \(street)")
             } else if let street = actor.addressStreetName {
@@ -144,6 +150,8 @@ struct ActorDetailView: View {
             } else if let code = actor.addressCountryCode {
                 LabeledContent("Country", value: code)
             }
+        } header: {
+            Text("Address")
         }
     }
 
@@ -154,13 +162,15 @@ struct ActorDetailView: View {
     }
 
     private var prrcSection: some View {
-        Section("Person Responsible for Regulatory Compliance") {
+        Section {
             let fullName = [actor.prrcFirstName, actor.prrcFamilyName]
                 .compactMap { $0 }
                 .joined(separator: " ")
             if !fullName.isEmpty {
                 LabeledContent("Name", value: fullName)
             }
+        } header: {
+            Text("Person Responsible for Regulatory Compliance")
         }
     }
 

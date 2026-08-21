@@ -15,12 +15,13 @@
 		B61547343035D44900B82250 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547333035D44900B82250 /* AppState.swift */; };
 		B61547383035D46700B82250 /* ActorSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547373035D46700B82250 /* ActorSearchView.swift */; };
 		B615473A3035D46800B82250 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547393035D46800B82250 /* ScannerView.swift */; };
-		B615473C3035D46E00B82250 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615473B3035D46E00B82250 /* SettingsView.swift */; };
 		B615473F3036046800B82250 /* ActorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615473E3036046800B82250 /* ActorDetailView.swift */; };
 		B61547413036046C00B82250 /* DeviceSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547403036046C00B82250 /* DeviceSearchView.swift */; };
 		B615474330360BFD00B82250 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615474230360BFD00B82250 /* DeviceDetailView.swift */; };
 		B61547453036126A00B82250 /* UdiDeviceLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61547443036126A00B82250 /* UdiDeviceLabelView.swift */; };
 		B615474830362DB600B82250 /* EudamedMobile.icon in Resources */ = {isa = PBXBuildFile; fileRef = B615474730362DB600B82250 /* EudamedMobile.icon */; };
+		B615474A303729FC00B82250 /* SRNValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6154749303729FC00B82250 /* SRNValidator.swift */; };
+		B615474E30372B9800B82250 /* DeviceIdentifierValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B615474D30372B9800B82250 /* DeviceIdentifierValidator.swift */; };
 		BEEE2432CFE116E10E7BAA33 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8991EB21DA1368CC2D073085 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -33,13 +34,14 @@
 		B61547333035D44900B82250 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		B61547373035D46700B82250 /* ActorSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorSearchView.swift; sourceTree = "<group>"; };
 		B61547393035D46800B82250 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		B615473B3035D46E00B82250 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B615473E3036046800B82250 /* ActorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailView.swift; sourceTree = "<group>"; };
 		B61547403036046C00B82250 /* DeviceSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSearchView.swift; sourceTree = "<group>"; };
 		B615474230360BFD00B82250 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 		B61547443036126A00B82250 /* UdiDeviceLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdiDeviceLabelView.swift; sourceTree = "<group>"; };
 		B61547463036297B00B82250 /* EudamedMobile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EudamedMobile.png; sourceTree = "<group>"; };
 		B615474730362DB600B82250 /* EudamedMobile.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = EudamedMobile.icon; sourceTree = "<group>"; };
+		B6154749303729FC00B82250 /* SRNValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRNValidator.swift; sourceTree = "<group>"; };
+		B615474D30372B9800B82250 /* DeviceIdentifierValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIdentifierValidator.swift; sourceTree = "<group>"; };
 		EC15DF15EE8CFF8F3CBE7770 /* eudamed-mobile-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eudamed-mobile-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,8 @@
 				B615474730362DB600B82250 /* EudamedMobile.icon */,
 				2CB0C1C3E2DCB863A34E21BD /* Assets.xcassets */,
 				18ACCC5647507C1963868C69 /* Preview Content */,
+				B6154749303729FC00B82250 /* SRNValidator.swift */,
+				B615474D30372B9800B82250 /* DeviceIdentifierValidator.swift */,
 			);
 			path = "eudamed-mobile";
 			sourceTree = "<group>";
@@ -99,7 +103,6 @@
 			children = (
 				B61547373035D46700B82250 /* ActorSearchView.swift */,
 				B61547393035D46800B82250 /* ScannerView.swift */,
-				B615473B3035D46E00B82250 /* SettingsView.swift */,
 				16E3499190A9A9362DEA4C0B /* ContentView.swift */,
 				B615473E3036046800B82250 /* ActorDetailView.swift */,
 				B61547403036046C00B82250 /* DeviceSearchView.swift */,
@@ -193,10 +196,11 @@
 			files = (
 				B615474330360BFD00B82250 /* DeviceDetailView.swift in Sources */,
 				B615473F3036046800B82250 /* ActorDetailView.swift in Sources */,
-				B615473C3035D46E00B82250 /* SettingsView.swift in Sources */,
+				B615474A303729FC00B82250 /* SRNValidator.swift in Sources */,
 				B61547413036046C00B82250 /* DeviceSearchView.swift in Sources */,
 				B61547453036126A00B82250 /* UdiDeviceLabelView.swift in Sources */,
 				B61547343035D44900B82250 /* AppState.swift in Sources */,
+				B615474E30372B9800B82250 /* DeviceIdentifierValidator.swift in Sources */,
 				B61547383035D46700B82250 /* ActorSearchView.swift in Sources */,
 				139C4E857456FB00821F1700 /* ContentView.swift in Sources */,
 				B615473A3035D46800B82250 /* ScannerView.swift in Sources */,
@@ -242,6 +246,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -277,21 +282,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "li.kausch.eudamed-mobile";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = li.kausch.eudamed;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -333,6 +341,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -361,21 +370,24 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eudamed-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = Y7R5N52YDS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Used to scan QR codes and barcodes on medical device labels so you can look up devices in the EUDAMED database.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				"INFOPLIST_KEY_UISupportedInterfaceOrientations~ipad" = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "li.kausch.eudamed-mobile";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = li.kausch.eudamed;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

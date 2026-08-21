@@ -178,7 +178,7 @@ struct UdiDeviceLabelView: View {
 
 extension UdiDevice {
     static var sampleForDemo: UdiDevice {
-        let d = UdiDevice(primaryDi: "04007221088620")
+        var d = UdiDevice(primaryDi: "04007221088620")
         d.tradeName = "GlucaSense Pro"
         d.deviceName = "Continuous Glucose Monitoring System"
         d.deviceModel = "GSP-3000"

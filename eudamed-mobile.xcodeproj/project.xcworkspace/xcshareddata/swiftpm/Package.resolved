@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tkausch/eudamed-public",
       "state" : {
-        "revision" : "92a5191389cea97bf786262f6d40fca3516e7686",
-        "version" : "1.0.0"
+        "revision" : "65c121928434c52a209ed1238589c005a2750884",
+        "version" : "1.0.17"
       }
     },
     {

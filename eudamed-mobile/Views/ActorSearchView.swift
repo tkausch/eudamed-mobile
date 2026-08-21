@@ -73,26 +73,29 @@ final class ActorSearchViewModel {
         } else {
             base = actors
         }
-        let sorted = base.sorted {
-            ($0.name ?? $0.actorId).localizedCaseInsensitiveCompare($1.name ?? $1.actorId) == .orderedAscending
-        }
-        var result: [(letter: String, actors: [Actor])] = []
-        for actor in sorted {
+        var groups: [String: [Actor]] = [:]
+        for actor in base {
             let name = actor.name ?? actor.actorId
             let firstChar = String(name.prefix(1)).uppercased()
-            let letter = firstChar.first?.isLetter == true ? firstChar : "#"
-            if let last = result.last, last.letter == letter {
-                result[result.count - 1].actors.append(actor)
-            } else {
-                result.append((letter: letter, actors: [actor]))
-            }
+            let normalized = firstChar.folding(options: .diacriticInsensitive, locale: .current)
+            let letter = normalized.first?.isASCII == true && normalized.first?.isLetter == true ? normalized : "#"
+            groups[letter, default: []].append(actor)
         }
-        return result
+        return groups.keys
+            .sorted { $0.localizedCompare($1) == .orderedAscending }
+            .map { letter in
+                let sorted = groups[letter]!.sorted {
+                    ($0.name ?? $0.actorId).localizedCaseInsensitiveCompare($1.name ?? $1.actorId) == .orderedAscending
+                }
+                return (letter: letter, actors: sorted)
+            }
     }
 
     var sectionLetters: [String] {
         groupedActors.map(\.letter)
     }
+
+    var isSrnValid: Bool { SRNValidator.isValid(srn) }
 
     var canSearch: Bool {
         actorType != nil ||
@@ -110,9 +113,18 @@ final class ActorSearchViewModel {
         [name, srn, countryCode].filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }.count
     }
 
+    private static let isoToEu: [String: String] = [
+        "GR": "EL",  // Greece
+        "GB": "UK",  // United Kingdom
+    ]
+
     func search() {
         guard canSearch else {
             validationMessage = "Enter at least one search criterion."
+            return
+        }
+        guard isSrnValid else {
+            validationMessage = "Invalid SRN - has wrong format"
             return
         }
         validationMessage = nil
@@ -122,7 +134,7 @@ final class ActorSearchViewModel {
             actorId: srn.trimmedOrNil,
             name: name.trimmedOrNil,
             actorType: actorType?.rawValue,
-            countryIso2Code: countryCode.trimmedOrNil
+            countryIso2Code: countryCode.trimmedOrNil.map { Self.isoToEu[$0] ?? $0 }
         )
 
         isLoading = true
@@ -174,6 +186,7 @@ private extension String {
         let t = trimmingCharacters(in: .whitespaces)
         return t.isEmpty ? nil : t
     }
+
 }
 
 // MARK: - View
@@ -198,7 +211,7 @@ struct ActorSearchView: View {
                     }
                 }
 
-                if viewModel.hasSearched || viewModel.isLoading {
+                if viewModel.hasSearched && !viewModel.isLoading {
                     resultCountSection
                 }
 
@@ -264,7 +277,7 @@ struct ActorSearchView: View {
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.words)
 
-            TextField("SRN", text: $viewModel.srn)
+            TextField("SRN  e.g. DE-MF-000123456", text: $viewModel.srn)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.characters)
                 .font(.system(.body, design: .monospaced))
@@ -320,15 +333,7 @@ struct ActorSearchView: View {
 
     private var resultCountSection: some View {
         let displayed = viewModel.displayedActorCount
-        let total = viewModel.actors.count
-        let text: String
-        if viewModel.isLoading {
-            text = "Searching…"
-        } else if viewModel.statusFilter != nil && displayed != total {
-            text = "\(displayed) of \(total) result\(total == 1 ? "" : "s")"
-        } else {
-            text = "\(displayed) result\(displayed == 1 ? "" : "s")"
-        }
+        let text = "\(displayed) result\(displayed == 1 ? "" : "s")"
         return Section {
             HStack {
                 Spacer()
@@ -457,7 +462,7 @@ struct ActorRowView: View {
                 .font(.body)
                 .fontWeight(.medium)
 
-            Text(actor.actorId)
+            Text("SRN: \(actor.actorId)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fontDesign(.monospaced)
@@ -544,8 +549,16 @@ private struct SectionIndexView: View {
 // MARK: - Country Picker
 
 private extension String {
+    // EUDAMED uses EU-specific codes that differ from ISO 3166-1 (e.g. EL for Greece)
+    private static let euToIso: [String: String] = [
+        "EL": "GR",  // Greece
+        "UK": "GB",  // United Kingdom
+        "XI": "GB",  // Northern Ireland (EUDAMED post-Brexit code)
+    ]
+
     var countryFlag: String {
-        unicodeScalars.compactMap { scalar -> Unicode.Scalar? in
+        let code = String.euToIso[uppercased()] ?? self
+        return code.unicodeScalars.compactMap { scalar -> Unicode.Scalar? in
             let value = Int(scalar.value) - 65 + 127462
             guard value >= 0 else { return nil }
             return Unicode.Scalar(UInt32(value))

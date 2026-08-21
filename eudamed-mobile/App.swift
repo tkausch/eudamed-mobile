@@ -8,6 +8,7 @@ struct eudamed_mobileApp: App {
         WindowGroup {
             ContentView()
                 .environment(appState)
+                .preferredColorScheme(.light)
         }
     }
 }
